@@ -1,7 +1,7 @@
 # WP Plugin CI
 
 <p>
-  <a href="https://github.com/gunjanjaswal/wp-plugin-ci/actions/workflows/test.yml"><img src="https://github.com/gunjanjaswal/wp-plugin-ci/actions/workflows/test.yml/badge.svg" alt="Test"></a>
+  <a href="https://github.com/gunjanjaswal/WP-Plugin-CI/actions/workflows/test.yml"><img src="https://github.com/gunjanjaswal/WP-Plugin-CI/actions/workflows/test.yml/badge.svg" alt="Test"></a>
   <img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT">
   <img src="https://img.shields.io/badge/GitHub-Action-2088FF?logo=githubactions&logoColor=white" alt="GitHub Action">
 </p>
@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: gunjanjaswal/wp-plugin-ci@v1
+      - uses: gunjanjaswal/WP-Plugin-CI@v1
         with:
           php-version: '8.2'
           readme: readme.txt
@@ -34,7 +34,7 @@ jobs:
 Turn on the official Plugin Check too:
 
 ```yaml
-      - uses: gunjanjaswal/wp-plugin-ci@v1
+      - uses: gunjanjaswal/WP-Plugin-CI@v1
         with:
           plugin-check: 'true'
 ```
@@ -54,7 +54,7 @@ Required (a failure if missing): the `=== Name ===` header, `Stable tag`, `Requi
 
 ## Pairs well with
 
-[wp-plugin-version-guard](https://github.com/gunjanjaswal/wp-plugin-version-guard), which fails the build when your version numbers drift apart. Run both and your plugin repo has a solid gate before every release.
+[wp-plugin-version-guard](https://github.com/gunjanjaswal/WP-Plugin-Version-Guard), which fails the build when your version numbers drift apart. Run both and your plugin repo has a solid gate before every release.
 
 ## License
 
