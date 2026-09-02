@@ -1,0 +1,18 @@
+name: Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  self-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./
+        with:
+          php-version: '8.2'
+          plugin-dir: tests/fixture
+          readme: tests/fixture/readme.txt

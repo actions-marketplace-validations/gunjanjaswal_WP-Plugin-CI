@@ -1,0 +1,51 @@
+name: 'WP Plugin CI'
+description: 'One-step CI for WordPress plugins: PHP lint, readme.txt validation, and optional Plugin Check.'
+author: 'Gunjan Jaswal'
+
+branding:
+  icon: 'check-square'
+  color: 'blue'
+
+inputs:
+  php-version:
+    description: 'PHP version used for linting.'
+    required: false
+    default: '8.2'
+  plugin-dir:
+    description: 'Directory to scan for PHP files.'
+    required: false
+    default: '.'
+  readme:
+    description: 'Path to readme.txt. Set empty to skip validation.'
+    required: false
+    default: 'readme.txt'
+  plugin-check:
+    description: 'Run the official WordPress Plugin Check against the repo root.'
+    required: false
+    default: 'false'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ inputs.php-version }}
+        coverage: none
+
+    - name: PHP lint
+      shell: bash
+      run: bash "${{ github.action_path }}/php-lint.sh"
+      env:
+        INPUT_PLUGIN_DIR: ${{ inputs.plugin-dir }}
+
+    - name: Validate readme.txt
+      if: ${{ inputs.readme != '' }}
+      shell: bash
+      run: bash "${{ github.action_path }}/validate-readme.sh"
+      env:
+        INPUT_README: ${{ inputs.readme }}
+
+    - name: WordPress Plugin Check
+      if: ${{ inputs.plugin-check == 'true' }}
+      uses: WordPress/plugin-check-action@v1
